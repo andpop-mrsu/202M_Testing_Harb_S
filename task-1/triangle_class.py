@@ -1,10 +1,18 @@
 from triangle_func import IncorrectTriangleSides
 
+
 class Triangle:
+
     def __init__(self, a, b, c):
-        sides = sorted([a, b, c])
-        if sides[0] <= 0 or sides[0] + sides[1] <= sides[2]:
-            raise IncorrectTriangleSides("Invalid triangle sides")
+        if not all(isinstance(x, (int, float)) for x in (a, b, c)):
+            raise IncorrectTriangleSides
+
+        if a <= 0 or b <= 0 or c <= 0:
+            raise IncorrectTriangleSides
+
+        if a + b <= c or a + c <= b or b + c <= a:
+            raise IncorrectTriangleSides
+
         self.a = a
         self.b = b
         self.c = c
